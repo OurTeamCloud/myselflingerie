@@ -1,0 +1,15 @@
+        {% if settings.social_facebook_link != blank %}
+            <a class="icon-fallback-text" href="{{ settings.social_facebook_link }}" title="{{ shop.name }} on Facebook" target="_blank" itemprop="sameAs" style="padding:0 10px;">
+        		<i class="fa fa-facebook fa-lg" aria-hidden="true" style="color: #fff;font-size: 20px;"></i>
+            </a>
+        {% endif %}
+        {% if settings.social_instagram_link != blank %}
+            <a class="icon-fallback-text" href="{{ settings.social_instagram_link }}" title="{{ shop.name }} on Instagram" target="_blank" itemprop="sameAs" style="padding:0 10px;">
+              <i class="fa fa-instagram fa-lg" aria-hidden="true" style="color: #fff;font-size: 20px;"></i>
+            </a>
+        {% endif %}
+        {% if settings.social_google_plus_link != blank %}
+            <a class="icon-fallback-text" href="{{ settings.social_google_plus_link }}" title="{{ shop.name }} on My Business" target="_blank" itemprop="sameAs" style="padding:0 10px;">
+              <i class="fa fa-google" aria-hidden="true" style="color: #fff;font-size: 20px;"></i>
+            </a>
+        {% endif %}

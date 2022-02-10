@@ -1,0 +1,214 @@
+<style type="text/css">
+  
+* { box-sizing: border-box; }
+
+/* force scrollbar */
+html { overflow-y: scroll; }
+
+  body { background:#FFFCF6; }
+
+/* ---- grid ---- */
+
+
+
+/* clear fix */
+.masonrygrid:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+/* ---- .grid-item ---- */
+
+.grid-sizer,
+.grid-item {
+  width: 33.333%;
+}
+
+.grid-item {
+  float: left;
+    padding: 10px;
+}
+  
+/* fluid 5 columns */
+.grid-sizer,
+.grid-item--width4 { width:33.33333%;}
+/* 2 columns wide */
+.grid-item--width8 { width:66.66667%; }
+  
+  
+  .blog-mansory .masonrygrid .animate-scale1:before {
+    content: "";
+    background-color: rgba(179,102,174,.1);
+    display: block;
+    position: absolute;
+    left: -100%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transition: all .3s ease 0s;
+    z-index: 0;
+}
+  
+  .blog-mansory .masonrygrid .animate-scale1 {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    height: 100%;
+    width: 100%
+}
+
+
+
+.blog-mansory .masonrygrid .animate-scale1:hover:before {
+    left: 0
+}
+  
+  
+  @media screen and (max-width: 767px){
+  
+    .grid-item {
+  	  float: none;
+      left: unset !important;
+      top: unset !important;
+      width: 100%;
+      position:relative !important;
+      display: block;
+	}
+    
+    .magazine-categories {
+   
+    grid-template-columns: repeat(auto-fill, minmax(30%,1fr));
+   
+	}
+    
+    .masonrygrid{
+    height: auto !important;
+    }
+    
+    .pagination {
+   
+    padding: 30px 0;
+
+	}
+    
+  }
+  
+  @media screen and (max-width: 480px){
+  	.magazine-categories {
+   
+    grid-template-columns: repeat(auto-fill, minmax(50%,1fr));
+   
+	}
+  }
+
+  
+</style>
+
+
+
+{% if section.settings.blog_post != blank %}
+  {% assign limit = section.settings.blog_post %}
+{% else %}
+  {% assign limit = 3 %}
+{% endif %}
+
+{% paginate blog.articles by limit %}
+
+<div class="content-blog blog-mansory">
+  <ul class=" masonrygrid">
+    <div class="grid-sizer"></div>
+    {% for article in blog.articles %}
+    
+    	{% if forloop.first == true %}
+    		{% render 'blog-msl-masonry' with article as article, grid_item_width: 'grid-item--width8', per_row: '3' %}
+        	
+        {% else %}
+        	{% render 'blog-msl-masonry' with article as article, grid_item_width: 'grid-item--width4', per_row: '3' %}
+        {%endif%}
+    
+    
+    
+    {% endfor %}
+  </ul>
+  
+  
+<script src="{{ 'masonry.pkgd.min.js' | asset_url }}"></script>
+<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+<script>
+  var $grid = $('.masonrygrid').masonry({
+    itemSelector: '.grid-item',
+    percentPosition: true,
+    columnWidth: '.grid-sizer'
+  });
+  // layout Masonry after each image loads
+  $grid.imagesLoaded().progress( function() {
+    $grid.masonry();
+  });	
+
+
+</script>
+
+  {% if paginate.pages > 1 %}
+  {% render 'pagination' paginate: paginate %}
+  {% endif %}
+</div>
+{% endpaginate %}
+
+
+
+
+
+<style>
+  .halo-blog-content .blog-item-2 .article-inner {
+    text-align: {{ section.settings.blog_text_align }};
+  }
+</style>
+
+{% schema %}
+  {
+    "name": "Blog Mansory",
+	"class": "col-12 col-xl-9 col-main",
+    "settings": [      
+      {
+        "type": "text",
+        "id": "blog_post",
+        "label": "Blog post per page",
+        "default": "3"
+      },
+      {
+        "type": "select",
+        "id": "blog_text_align",
+        "label": "Blog Text Align",
+        "options": [
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "left",
+        "info": "Default Value: Left"
+      },
+      {
+        "type": "checkbox",
+        "id": "blog_show_author",
+        "label": "Show author",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "blog_show_date",
+        "label": "Show date",
+        "default": true
+      }
+    ]
+  }
+{% endschema %}

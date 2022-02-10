@@ -1,0 +1,126 @@
+<div class="home-custom-block home-about-us-section" id="custom-block-{{section.id}}">
+  	<div class="container">
+      	<div class="row justify-center">
+          
+          
+                <div class="col-12 col-md-3 column">
+					<img src="{{section.settings.image | img_url: 'original'}}">
+                </div>
+
+                <div class="col-12 col-md-5 column text-left">
+
+                    <h3>
+                    {{section.settings.headingtext}}
+                    </h3>
+
+                  <div class="section-content">
+                  {{section.settings.contenttext}}
+                  </div>
+                  <br/>
+                  <a class="btn" href="{{section.settings.btnlink}}">{{section.settings.buttontext}}</a>
+
+                </div>
+          
+        </div>
+      
+    </div>
+      
+</div>
+
+<style>
+  {% assign margin_bottom =  section.settings.margin_bottom %}  
+
+    @media (max-width: 767px) {
+        #custom-block-{{ section.id }} {
+            margin-bottom: {{ section.settings.margin_bottom_mb }}px;
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 1199px) {
+        #custom-block-{{ section.id }} {
+            margin-bottom: {{ section.settings.margin_bottom_tab }}px;
+        }
+    }
+  
+    @media (min-width: 1200px) {
+        #custom-block-{{ section.id }} {
+        margin-bottom: {{ margin_bottom }}px;
+        }
+    }   
+
+    #custom-block-{{ section.id }} .img-box {
+        text-align: {{ section.settings.img_align }};
+    }
+</style>
+
+
+{% schema %}
+  {
+    "name": "Home About Us Section",
+	"class": "home-custom-block-baner-sections home-custom-block-baner-one-sections",
+    "settings": [
+       
+  		{
+            "type": "text",
+            "id": "headingtext",
+            "label": "Heading Text"
+        },
+		{
+            "type": "richtext",
+            "id": "contenttext",
+            "label": "Content Text"
+        },
+		{
+            "type": "text",
+            "id": "buttontext",
+            "label": "Button Text"
+        },
+        {
+                "type" : "url",
+                "id" : "btnlink",
+                "label" : "Button Link"
+        },
+
+		{
+                "type": "image_picker",
+                "id": "image",
+                "label" : "Select Image"
+        },
+        {
+            "type": "range",
+            "id": "margin_bottom_mb",
+            "label": "Mobile",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "default": 25
+        },
+        {
+            "type": "range",
+            "id": "margin_bottom_tab",
+            "label": "Tablet",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "default": 30
+        },             
+        {
+            "type": "range",
+            "id": "margin_bottom",
+            "label": "Margin Bottom",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "default": 30
+        }	    
+    ],
+
+	"presets": [
+        {
+            "name": "Home About Us Section",
+            "category": "2.0 Custom Sections"
+        }
+    ]
+    
+  }
+{% endschema %} 

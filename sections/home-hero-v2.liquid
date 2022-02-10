@@ -1,0 +1,477 @@
+<div class="home-custom-block hero-section" id="custom-block-{{section.id}}">
+  	<div class="{% if section.settings.layout == 'default' %}container{% else %}container-fluid{% endif %}">
+      
+      <div class="row">
+        	
+        	<div class="hero-box img-box col-12 col-lg-6 column">
+              
+              {%- assign img_url = section.settings.bgimage | img_url: 'original'-%}
+              <div class="col-bg" style="
+              background: url('{{img_url}}') no-repeat center;
+              background-size:cover;
+              min-height:100%;
+              vertical-align:middle;
+              ">
+                <div class="left-col-content">
+                    <h2 class="section-title">
+                      {{section.settings.hero-right-content}}
+                    </h2>
+                    {% if section.settings.btntext != '' %}
+                      <a href="{{section.settings.btnlink}}" title="{{section.settings.btntext}}" class="btn">           
+                      <span>
+                        {{section.settings.btntext}}
+                      </span>
+                      </a>
+                    {% endif %}
+                  
+                </div>
+              </div>
+            </div>
+              
+            <div class="collections-box col-12 col-lg-6 column">
+              
+              {% if section.blocks.size > 0 %}
+              
+              	<div class="row hero-collection-block">
+            		{% for block in section.blocks %}
+                  		{% case block.type %}
+                  
+                  		{% when 'html' %}
+                          
+                  			<div class="img-box col-12 col-sm-6 column">
+                              <a class="collection-item" href="{{ block.settings.btnlink }}">
+                              <div class="row justify-center">
+                                
+                                
+                                  <div class=" col-6 vertical-center">
+                                    <div class="btn">{{ block.settings.btntext }}</div>
+                                  </div>
+                                	
+                                  <div class="col-6 svg-img" style="background-image:url({{ block.settings.collectionimage | img_url: 'original'  }})">
+                                    
+                                    
+                                    
+                                    {% comment %}
+                                    <img src="{{ block.settings.collectionimage | img_url: 'original'  }}">
+                                    
+                                    {{ block.settings.code }}
+                                    <img src="{{ block.settings.code | asset_url }}" style="height:{{ block.settings.blocksvgheight}}; width:{{ block.settings.blocksvgwidth}}">
+                                  	{% endcomment %}
+                                	
+                                </div>
+                                
+                              </div>
+                                </a>
+                               
+                          </div>
+                  
+                        {% endcase %}
+                  		
+                        
+                              
+              		{% endfor %}
+              	</div>
+              {% endif %}
+              
+            </div>
+        
+      </div>
+      
+      
+  	</div>
+</div>
+
+
+
+{% schema %}
+  {
+    "name": "Home Main Banner",
+	"class": "home-custom-block-baner-sections home-custom-block-baner-one-sections",
+    "max_blocks": 6,
+    "settings": [
+        {
+            "type": "header",
+            "content": "Left Column"
+        },
+  		{
+                "type": "image_picker",
+                "id": "bgimage",
+                "label" : "Select Background Image"
+        },
+        {
+            "type" : "textarea",
+            "id" : "hero-right-content",
+            "label" : "Banner Text"
+        },
+  		{
+            "type": "text",
+            "id": "btntext",
+            "label": "Button Text"
+        },
+        {
+                "type" : "url",
+                "id" : "btnlink",
+                "label" : "Button Link"
+        },
+        {
+            "type": "header",
+            "content": "Margin Bottom:"
+        },
+  		
+        {
+            "type": "range",
+            "id": "margin_bottom_mb",
+            "label": "Mobile",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "default": 25
+        },
+        {
+            "type": "range",
+            "id": "margin_bottom_tab",
+            "label": "Tablet",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "default": 30
+        },             
+        {
+            "type": "range",
+            "id": "margin_bottom",
+            "label": "Margin Bottom",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "default": 30
+        }	    
+    ],
+    "blocks": [
+		{
+        "type": "html",
+        "name": "Custom HTML",
+        "settings": [
+          
+
+			{
+                "type": "image_picker",
+                "id": "collectionimage",
+                "label" : "Select Collection Image"
+            },
+			
+			{
+            "type": "text",
+            "id": "blocksvgheight",
+            "label": "Image Height"
+        	},
+
+			{
+            "type": "text",
+            "id": "blocksvgwidth",
+            "label": "Image Width"
+        	},
+
+			{
+            "type": "text",
+            "id": "blockheadingtext",
+            "label": "Heading Text"
+        	},
+
+			{
+            "type": "text",
+            "id": "btntext",
+            "label": "Button Text",
+            "default": "Shop"
+          },
+			{
+                    "type" : "url",
+                    "id" : "btnlink",
+                    "label" : "Button Link"
+                },
+          {
+            "type": "select",
+            "id": "width",
+            "label": "Column width",
+            "default": "50%",
+            "options": [
+              {
+                "value": "25%",
+                "label": "25%"
+              },
+              {
+                "value": "33%",
+                "label": "33%"
+              },
+              {
+                "value": "50%",
+                "label": "50%"
+              },
+              {
+                "value": "66%",
+                "label": "66%"
+              },
+              {
+                "value": "75%",
+                "label": "75%"
+              },
+              {
+                "value": "100%",
+                "label": "100%"
+              }
+            ]
+          }
+        ]
+      },
+        {
+            "type": "smallImg",
+            "name": "Small Image",
+            "settings": [
+            {
+                "type": "select",
+                "id": "banner_is",
+                "label": "Banner is:",
+                "default": "left",
+                "options": [
+                {
+                    "value": "left",
+                    "label": "Left"
+                },              
+                {
+                    "value": "right",
+                    "label": "Right"
+                }
+                ]
+            }, 
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label" : "Select Image"
+            },
+            {
+                "type": "header",
+                "content": "Banner Content"
+            },
+            {
+                "type" : "color",
+                "id" : "bg_banner_content",
+                "label" : "Background Banner Content",
+                "default" : "#fafafa"
+            },
+            {
+                "type" : "text",
+                "id" : "banner_heading",
+                "label" : "Banner Heading",
+                "default" : "Metropolis"
+            },
+            {
+                "type" : "text",
+                "id" : "font_size_banner_heading",
+                "label" : "Heading Font Size ",
+                "default" : "20px"
+            },
+            {
+                "type" : "color",
+                "id" : "color_banner_heading",
+                "label" : "Heading Color",
+                "default" : "#232323"
+            },
+            {
+                "type" : "textarea",
+                "id" : "banner_des",
+                "label" : "Banner Description",
+                "default": "Cosmo Milance<br>Collections"
+            },
+            {
+                "type" : "text",
+                "id" : "font_size_banner_des",
+                "label" : "Description Font Size",
+                "default" : "12px"
+            },
+            {
+                "type" : "color",
+                "id" : "color_banner_des",
+                "label" : "Description Color",
+                "default" : "#232323"
+            },
+            {
+                "type" : "text",
+                "id" : "banner_button",
+                "label" : "Button Banner",
+                "default" : "Shop Now"
+            },
+            {
+                "type" : "url",
+                "id" : "link",
+                "label" : "Banner Link"
+            },
+            {
+                "type" : "color",
+                "id" : "bg_banner_button",
+                "label" : "Background Button",
+                "default" : "#fff"
+            },
+            {
+                "type" : "color",
+                "id" : "border_banner_button",
+                "label" : "Border Button",
+                "default" : "#5a5a5a"
+            },
+            {
+                "type" : "color",
+                "id" : "color_banner_button",
+                "label" : "Button Color",
+                "default" : "#232323"
+            }		  
+        ]
+    },
+        {
+            "type": "largeImg",
+            "name": "Large Image",
+            "settings": [           
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label" : "Select Image Background"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "image1",
+                    "label" : "Select Image Parallax 1"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "image2",
+                    "label" : "Select Image Parallax 2"
+                },
+                {
+                    "type": "header",
+                    "content": "Parallax"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "display_parallax",
+                    "label": "Display Parallax",
+                    "default": false
+                },            
+                {
+                    "type" : "text",
+                    "id" : "height_img_parallax",
+                    "label" : "Height Parallax Image",
+                    "default" : "920px"
+                },
+                {
+                    "type": "header",
+                    "content": "Banner Content"
+                },
+                {
+                    "type": "select",
+                    "id": "alignment",
+                    "label": "Text alignment",
+                    "default": "left",
+                    "options": [
+                        {
+                            "value": "left",
+                            "label": "Left"
+                        },
+                        {
+                            "value": "center",
+                            "label": "Center"
+                        },
+                        {
+                            "value": "right",
+                            "label": "Right"
+                        }
+                    ]
+                },
+                {
+                    "type" : "text",
+                    "id" : "banner_heading",
+                    "label" : "Banner Heading",
+                    "default" : "Metropólis"
+                },
+                {
+                    "type" : "text",
+                    "id" : "font_size_banner_heading",
+                    "label" : "Heading Font Size ",
+                    "default" : "40px"
+                },
+                {
+                    "type" : "color",
+                    "id" : "color_banner_heading",
+                    "label" : "Heading Color",
+                    "default" : "#232323"
+                },
+                {
+                    "type" : "textarea",
+                    "id" : "banner_des",
+                    "label" : "Banner Description",
+                    "default": "Pellentesque posuere orci lobortis scelerisque blandit. Donec id tellus lacinia an tincidunt risus an consequat delit quisquemos."
+                },
+                {
+                    "type" : "text",
+                    "id" : "font_size_banner_des",
+                    "label" : "Description Font Size",
+                    "default" : "12px"
+                },
+                {
+                    "type" : "color",
+                    "id" : "color_banner_des",
+                    "label" : "Description Color",
+                    "default" : "#232323"
+                },
+                {
+                    "type" : "textarea",
+                    "id" : "countdown",
+                    "label" : "Countdown"
+                },
+                {
+                    "type" : "text",
+                    "id" : "banner_button",
+                    "label" : "Button Banner",
+                    "default" : "Shop The Looks"
+                },
+                {
+                    "type" : "url",
+                    "id" : "link",
+                    "label" : "Banner Link"
+                },
+                {
+                    "type" : "color",
+                    "id" : "bg_banner_button",
+                    "label" : "Background Button",
+                    "default" : "#232323"
+                },
+                {
+                    "type" : "color",
+                    "id" : "border_banner_button",
+                    "label" : "Border Button",
+                    "default" : "#232323"
+                },
+                {
+                    "type" : "color",
+                    "id" : "color_banner_button",
+                    "label" : "Button Color",
+                    "default" : "#fff"
+                },
+                {
+                    "type" : "text",
+                    "id" : "min_width_banner_button",
+                    "label" : "Banner Button Min Width",
+                    "default" : "237px"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Home Main Banner",
+            "category": "2.0 Custom Sections",
+            "blocks": [
+                {
+                    "type": "html"
+                }         
+            ]
+        }
+    ]
+  }
+{% endschema %} 

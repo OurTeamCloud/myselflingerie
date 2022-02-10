@@ -1,0 +1,54 @@
+<div class="list-category">
+  <div class="row">
+    {% for link in linklists[page.handle].links %}
+
+    {% assign collection = link.object %}
+    {% assign number_of_links = number_of_links | plus: 1 %}
+    <div class="grid-item wow fadeIn col-12 col-xs-12 col animated">
+      <div class="product-top">
+              <a href="{{ link.url }}" title="{{ link.title }}">
+                {% if collection.image %}
+                <img src="{{ collection | img_url: 'master' }}" alt="{{ link.title | escape }}">
+                {% else %}
+                {% assign product = collection.products.first %}
+                <img src="{{ product | img_url: 'master' }}" alt="{{ link.title | escape }}">
+                {% endif %}
+              </a>
+        		<div class="hover"></div>
+                <a href="{{ link.url }}" class="view"></a>
+            </div>
+
+          <div class="collection-title-wrapper">
+            <div class="collection-title">
+              <h3 class="h5">
+                <a href="{{ link.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}" {% if settings.enable_multilang %}data-translate="collections.general.link_title|title:{{link.title}}" translate-item="title"{% endif %}>
+                  {% include 'multilang' with link.title %}
+                </a>
+              </h3>
+              <p class="count-products" {% if settings.enable_multilang %}data-translate="collections.general.items_with_count|count:{{collection.all_products_count}}"{% endif %}>
+                {{ 'collections.general.items_with_count' | t: count: collection.all_products_count }}
+              </p>
+              <div class="desc">
+                {% if settings.enable_multilang and collection.description contains '[lang2]' %}
+                <div class="lang1">
+                  {{ collection.description | split: '[lang2]' | first | strip_html | truncatewords: 23 }}
+                </div>
+                <div class="lang2">
+                  {{ collection.description | split: '[lang2]' | last | strip_html  | truncatewords: 23 }}
+                </div>
+                {% else %}
+                <div>
+                  {{ collection.description | strip_html | truncatewords: 23 }}
+                </div>
+                {% endif %}
+              </div>
+              <p><a href="{{ collection.url }}" class="btn" {% if settings.enable_multilang %}data-translate="collections.general.shop_the_collection"{% endif %}>
+                {{ 'collections.general.shop_the_collection' | t }}
+                </a></p>
+            </div>
+          </div>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>

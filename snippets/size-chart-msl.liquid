@@ -1,0 +1,65 @@
+<div class="modal-body">
+                <div class="size-chart-img">
+                  {% assign msl-collection-charts = shop.metafields.msl-size-guide.collections-has-charts.collection-charts %}
+                  {% assign hassizechart = false %}
+                  
+                  
+                  
+                  {% assign fix-collection = '' %}
+                  {% if product_collections contains 'teen-swimsuits' %}
+                  	{% assign fix-collection = 'teen-swimsuits' %}
+                  
+                  {% elsif product.type == 'Panties' and product.vendor == 'Young Berry' %}
+                  	{% assign fix-collection = 'panties-young-berry' %}
+                  
+                  {% endif %}
+                  
+                  
+                  {% for collection in product.collections %}
+                  		
+                  		{% assign jdev = collection.handle %}
+                  		{% if fix-collection != '' %}
+                  			{% assign jdev = fix-collection %}
+                  		{% endif %}
+                  
+                  		{% if collection.handle != 'all' and msl-collection-charts[jdev] %}
+                  	
+                  			{% capture msl_chart_img %}{{ msl-collection-charts[jdev] | handle | append: '-sizechart.jpg' | file_url }}{% endcapture %}
+                    		<img src="{{ msl_chart_img }}" alt="{{ collection.title}} Size Guide" class="msl-chart"/>
+                  
+                  			{% assign hassizechart = true %}	
+                  			{% break %}
+                  				
+                  		{% endif %}
+                  		
+                  {% endfor %}
+                  
+                  {% if hassizechart == false %}
+                  
+                  <div class="tc text-center"><h2 style="color:#b366ae">Size Guide Coming Soon!<h2></div>
+                  
+                  {% endif %}
+                  
+                  
+{% comment %}                  
+                    {% if settings.size_chart == 'product_vendor' %}          
+                    {% capture img_vendor %}{{ product.vendor | handle | append: '-sizechart.jpg' | file_url }}{% endcapture %}
+                    	<img src="{{ img_vendor }}" alt="{{ settings.custom_size_chart_header }}" class="a"/>
+                    
+                    {% elsif settings.size_chart == 'product_type' %}
+                  
+                    {% capture img_type %}{{ product.type | handle | append: '-sizechart.jpg' | file_url }}{% endcapture %}
+                    	<img src="{{ img_type }}" alt="{{ settings.custom_size_chart_header }}" class="b"/>
+                    
+                    {% elsif settings.size_chart == 'different' %} 
+                      {% if product.metafields.c_f['Size Chart'] %}
+                          {% capture img_product %}{{ product.metafields.c_f['Size Chart'] }}{% endcapture %}
+                          <img class="c" src="{{ img_product }}" alt="{{ settings.custom_size_chart_header }}"/>
+                      {% endif %}
+
+                    {% elsif settings.size_chart == 'none' %} 
+                    <img src="{{ settings.custom_size_chart | img_url: 'original' }}" alt="{{ settings.custom_size_chart_header }}" class="d"/>
+                    {% endif %}
+{% endcomment %}
+                </div>
+            </div>

@@ -1,0 +1,24 @@
+<div class="collection-list-page">
+  <div class="container">
+    {% render 'breadcrumb' %}
+    <header class="page-header">
+      <h2>
+        {% render 'multilang' with page.title %}
+      </h2>  
+    </header>
+  </div>
+    <div class="wrapper-content">
+      {% comment %}
+     {% if settings.layout_collection == 'default' %}
+     	{% section 'collections-list-1' %}
+      
+      {% else %}
+      {% section 'home-custom-block-baner-collection-list' %}
+      {% section 'home-custom-product-collection-list' %}
+      
+      {% endif %}
+      
+      {% endcomment %}
+      {% section 'home-custom-product-collection-list' %}
+    </div>
+</div>

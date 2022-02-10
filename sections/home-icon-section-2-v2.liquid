@@ -1,0 +1,194 @@
+<div class="home-custom-block home-icon-section home-icon-section2" id="custom-block-{{section.id}}">
+  	<div class="container slim-container">
+      	<div class="section-heading">
+      	<h3 class="section-title">
+          {{section.settings.headingtext}}
+        </h3>
+        {% if section.settings.subheadingtext %}
+      		<div class="subhead">{{section.settings.subheadingtext}}</div>
+        {% endif %}
+    
+      	</div>
+            <div class="row">
+
+                  {% if section.blocks.size > 0 %}
+                  {% for block in section.blocks %}
+                  <div class="img-box col-12 col-sm-6 col-md-4 column">
+
+                    <div class="img">
+                      <img src="{{ block.settings.icon_image | img_url }}">
+                    </div>
+
+                    <div class="icon-content-wrap">
+                      <div class="iconhead">{{ block.settings.blockheadingtext }}</div>
+                      <div class="iconcontent">{{ block.settings.text }}</div>
+                    </div>
+
+                  </div>
+                  {% endfor %}
+                  {% endif %}
+
+
+
+            </div>
+      
+      </div>
+      
+</div>
+
+<style>
+  {% assign margin_bottom =  section.settings.margin_bottom %}  
+
+    @media (max-width: 767px) {
+        #custom-block-{{ section.id }} {
+            margin-bottom: {{ section.settings.margin_bottom_mb }}px;
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 1199px) {
+        #custom-block-{{ section.id }} {
+            margin-bottom: {{ section.settings.margin_bottom_tab }}px;
+        }
+    }
+  
+    @media (min-width: 1200px) {
+        #custom-block-{{ section.id }} {
+        margin-bottom: {{ margin_bottom }}px;
+        }
+    }   
+
+    #custom-block-{{ section.id }} .img-box {
+        text-align: {{ section.settings.img_align }};
+    }
+</style>
+
+
+{% schema %}
+  {
+    "name": "Home Icon Grid Section 2",
+	"class": "home-custom-block-baner-sections home-custom-block-baner-one-sections",
+    "max_blocks": 6,
+    "settings": [
+       
+  		{
+            "type": "text",
+            "id": "headingtext",
+            "label": "Heading Text"
+        },
+		{
+            "type": "text",
+            "id": "subheadingtext",
+            "label": "Sub Heading Text"
+        },
+        {
+                "type" : "url",
+                "id" : "btnlink",
+                "label" : "Button Link"
+        },
+        {
+            "type": "header",
+            "content": "Margin Bottom:"
+        },
+  		
+        {
+            "type": "range",
+            "id": "margin_bottom_mb",
+            "label": "Mobile",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "default": 25
+        },
+        {
+            "type": "range",
+            "id": "margin_bottom_tab",
+            "label": "Tablet",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "default": 30
+        },             
+        {
+            "type": "range",
+            "id": "margin_bottom",
+            "label": "Margin Bottom",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "default": 30
+        }	    
+    ],
+
+	"blocks": [
+	
+	{
+        "type": "image",
+        "name": "Custom Icon Blocks",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "icon_image",
+            "label": "Image"
+          },
+			{
+            "type": "text",
+            "id": "blockheadingtext",
+            "label": "Heading Text"
+        	},
+
+			{
+            "type": "richtext",
+            "id": "text",
+            "label": "Text",
+            "default": "<p>Your description about this block.</p>"
+          },
+          {
+            "type": "select",
+            "id": "width",
+            "label": "Column width",
+            "default": "50%",
+            "options": [
+              {
+                "value": "25%",
+                "label": "25%"
+              },
+              {
+                "value": "33%",
+                "label": "33%"
+              },
+              {
+                "value": "50%",
+                "label": "50%"
+              },
+              {
+                "value": "66%",
+                "label": "66%"
+              },
+              {
+                "value": "75%",
+                "label": "75%"
+              },
+              {
+                "value": "100%",
+                "label": "100%"
+              }
+            ]
+          }
+        ]
+      }
+	
+	],
+    
+    "presets": [
+        {
+            "name": "Home Icon Grid Section 2",
+            "category": "2.0 Custom Sections",
+            "blocks": [
+                {
+                    "type": "image"
+                }         
+            ]
+        }
+    ]
+  }
+{% endschema %}

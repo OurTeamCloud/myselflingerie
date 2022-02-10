@@ -1,0 +1,156 @@
+<div class="home-custom-block section-locations" id="custom-block-{{section.id}}">
+  
+  {%- assign img_url = section.settings.image | img_url: 'original'-%}
+  <div class="section-bg" style="
+              background: url('{{img_url}}') no-repeat center;
+              background-size:cover;
+              vertical-align:middle;
+              ">
+  	<div class="container">
+      	<div class="floating-box">
+
+                  <h3 class="text-center">
+                    {{section.settings.headingtext}}
+                  </h3>
+
+                  <div class="section-content text-center">
+                  {{section.settings.contenttext}}
+                  </div>
+          			
+          			<br/>
+          	
+                  <div class="row">
+					
+					<div class="col-md-12 column text-center locations-list">
+          		
+                        {% if section.blocks.size > 0 %}
+                            {% for block in section.blocks %}
+
+
+
+                                <a href="{{block.settings.btnlink}}" class="btn">{{block.settings.buttontext}}</a>
+
+                            {% endfor %}
+                        {% endif %}
+					</div>
+                    
+                  </div>
+          		
+
+        </div>
+      
+    </div>
+  </div>
+      
+</div>
+
+<style>
+  {% assign margin_bottom =  section.settings.margin_bottom %}  
+
+    @media (max-width: 767px) {
+        #custom-block-{{ section.id }} {
+            margin-bottom: {{ section.settings.margin_bottom_mb }}px;
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 1199px) {
+        #custom-block-{{ section.id }} {
+            margin-bottom: {{ section.settings.margin_bottom_tab }}px;
+        }
+    }
+  
+    @media (min-width: 1200px) {
+        #custom-block-{{ section.id }} {
+        margin-bottom: {{ margin_bottom }}px;
+        }
+    }   
+
+    #custom-block-{{ section.id }} .img-box {
+        text-align: {{ section.settings.img_align }};
+    }
+</style>
+
+
+{% schema %}
+  {
+    "name": "Home Locations Section",
+	"class": "home-custom-block-baner-sections home-custom-block-baner-one-sections",
+    "settings": [
+       
+  		{
+            "type": "text",
+            "id": "headingtext",
+            "label": "Heading Text"
+        },
+		{
+            "type": "richtext",
+            "id": "contenttext",
+            "label": "Content Text"
+        },
+		{
+                "type": "image_picker",
+                "id": "image",
+                "label" : "Select Background Image"
+        },
+        {
+            "type": "range",
+            "id": "margin_bottom_mb",
+            "label": "Mobile",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "default": 25
+        },
+        {
+            "type": "range",
+            "id": "margin_bottom_tab",
+            "label": "Tablet",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "default": 30
+        },             
+        {
+            "type": "range",
+            "id": "margin_bottom",
+            "label": "Margin Bottom",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "default": 30
+        }	    
+    ],
+
+	"blocks": [
+      {
+        "type": "text",
+        "name": "Locations",
+        "settings": [
+              {
+              "type": "text",
+              "id": "buttontext",
+              "label": "Location Name"
+              },
+              {
+              "type" : "url",
+              "id" : "btnlink",
+              "label" : "Location Text"
+              }
+			]
+		}
+	],
+	"presets": [
+        {
+            "name": "Home Locations Section",
+            "category": "2.0 Custom Sections",
+			"blocks": [
+                {
+                    "type": "text"
+                }         
+            ]
+        }
+		
+    ]
+    
+  }
+{% endschema %} 

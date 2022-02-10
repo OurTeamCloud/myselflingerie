@@ -1,0 +1,58 @@
+<section class="home-instagram {% if section.settings.slide_rows == '2' %}home-instagram-col-2{% endif %}" id="new-instagram-{{section.id}}">
+	<div class="container-fluid">
+  		
+      <div id="insta-feed" class=""></div>
+  		<a href="{{ section.settings.instagram_button_link }}" title="{{ section.settings.instagram_title | split: '|' | first }}" class="insta-btn" target="_blank">
+            {% render 'multilang' with section.settings.instagram_title %}
+        </a>
+  </div>
+</section>
+
+<style type="text/css">
+  #insta-feed{
+  margin-top:0;
+    
+  }
+  
+  .home-instagram .container-fluid{
+  padding:0;
+  }
+  
+  
+    
+    
+    @media only screen and (max-width: 540px) {
+      #insta-feed .instafeed-container {
+        width:50% !important;
+        padding-top:50% !important;
+      }
+    }
+</style>
+
+{% schema %}
+  {
+    "name": "Instafeed",
+    "class": "home-instagram-sections",
+    "settings": [   
+        {
+            "type": "textarea",
+            "id": "instagram_title",
+            "label": "Title",
+            "default": "#Ella On Instagram"
+        },
+        {
+            "type": "text",
+            "id": "instagram_button_link",
+            "label": "Button Instagram Link"
+        }
+    ],
+    
+    "presets": [
+        {
+            "name": "Instafeed",
+            "category": "Instagram"
+        }
+    ]
+  }
+
+{% endschema %}

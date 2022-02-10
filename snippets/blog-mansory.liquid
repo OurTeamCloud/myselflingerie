@@ -1,0 +1,38 @@
+<div class="blog-template blog-template-mansory">  
+  <div class="container">
+    {% render 'breadcrumb' %}
+    
+    <div class="page-header">
+      {% if current_tags %}    
+      <h1>
+        <a href="{{ blog.url }}">{% render 'multilang' with page_title %}</a> &raquo; {{ current_tags.first }}
+      </h1>
+      {% else %}    
+      <h1>
+        {% render 'multilang' with page_title %}
+      </h1>
+      {% endif %}
+    </div>
+    
+    <aside>
+      
+        <ul class="blog_tags">
+          <li>
+            {%- for tag in blog.all_tags -%}
+              <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>{% unless forloop.last %} {% endunless %}
+            {%- endfor -%}
+          </li>
+        </ul>
+     
+    </aside>
+
+    
+    <div class="halo-blog-content">
+      <div class="row">
+        
+        {% section 'sidebar-blog' %}
+        {% section 'blog-template-mansory' %}
+      </div>      
+    </div>   
+  </div>
+</div>

@@ -1,0 +1,77 @@
+<div class="chat-section-container" id="custom-block-{{section.id}}">
+    <div class="container slim-container ">
+    	
+      <div class="row">
+      	<div class="col-12 col-sm-7 col-md-6 column">
+          <div class="chat-bubble text-center">
+            <p class="text-left">Hi, I'm Mylie! Chat with me live, and I can assist you, bringing the Myself Lingerie experience virtually to you!</p>
+            <br/>
+            <a class="btn jbtn" href="javascript:void(0)">LET'S CHAT NOW</a>
+          </div>
+        </div>
+        <div class="col-12 col-sm-5 col-md-5 column">
+          
+          <img src="{{ "mylie-opt.png" | file_url}}">
+          
+        </div>
+      </div>
+      
+  	</div>
+  
+</div>
+<div class="home-custom-block section-custom-bg" id="custom-block-{{section.id}}-2">
+  <div class="container container-480 text-center">
+  <div class="size-image"><img src="{{ 'perfect-fit.png' | asset_url }}"></div>
+    <div style="font-size:32px; font-weight:bold">THE PERFECT FIT</div><br/><br/>
+  
+  <p>Shopping from home?</p>
+  
+  <p>Use our in-depth size chart to help you find what's best for you!</p>
+    <br/><br/>
+    <a class="btn jbtn" href="https://myselflingerie.com/pages/size-guide">OUR UNIQUE SIZING GUIDE</a>
+  </div>
+</div> 
+
+<style type="text/css">
+  .section-custom-bg{
+    font-size:18px;
+  	background:#eaeaea;
+    padding:100px 0 60px;
+    position:relative;
+  }
+  
+  .size-image {
+    position: absolute;
+    top: -50px;
+    left: 0;
+    right: 0;
+}
+</style>
+<script>
+  jQuery( document ).ready(function($) {
+    $(".chat-bubble a.btn").click(function(){
+  		window.tidioChatApi.open();
+	});
+});
+
+</script>
+
+{% schema %}
+  {
+    "name": "Home Chat Section",
+    "settings": [],
+	"presets": [
+      {
+        "name": "Home Chat Section",
+        "category": "2.0 Custom Sections"
+		}
+	]
+  }
+
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
