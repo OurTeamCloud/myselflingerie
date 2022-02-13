@@ -9,13 +9,13 @@ ___
 
 ***
 How to use:<br>
-Download MySelfLingerie theme and open it using a code editor<br>
+<b><h3>ADDING CHANGES LOCALLY:</h3></b>
+
+
+Download OxyTurf theme and open it using a code editor<br>
 Open code terminal and enter the following codes:<br><br>
 
 <b><h3>PLEASE USE THE STAGING BRANCH FIRST</h3></b><br>
-
-Double check everything before merging<br>
-If you think staging branch is okay to merge, then merge it to <b>master</b> branch
 
 
 Pulling and pushing code changes
@@ -28,3 +28,15 @@ Pulling and pushing code changes
 
 ::: Double check everything before merging<br>
 If you think staging branch is okay to merge, then merge it to <b>master</b> branch :::
+
+
+<b><h3>ADDING CHANGES VIA SHOPIFY CODE EDITOR</h3></b>
+
+1. Online Store
+2. Themes
+3. Select Theme(branch)
+4. Actions -> Edit Code
+
+::: Any changes made inside shopify code editor will automatically update our Github repository :::
+
+![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat")
