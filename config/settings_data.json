@@ -1017,7 +1017,6 @@
           },
           "1543546574439": {
             "type": "filter_text",
-            "disabled": true,
             "settings": {
               "enable": true,
               "title": "Size | Größe",
